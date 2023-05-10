@@ -13,7 +13,7 @@ json_data = json.load(open(os.path.join(local_path, 'json_data.json'), "rb"))
 json_str = json.dumps(json_data)
 
 # Utilisation de la fonction unidecode pour enlever les accents et autres caractères spéciaux
-json_data = (unidecode(json_str))
+json_data = unidecode(json_str)
 
 # Conversion de la chaine de caractere JSON à nouveau en dictionnaire Python
 # Le dictionnaire python est plus pratique à manipuler que la chaine de caractère car il est structuré

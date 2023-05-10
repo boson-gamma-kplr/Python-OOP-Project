@@ -1,13 +1,15 @@
-def generate_class_def(nom_classe: str, attributs: dict, nom_superclasse: str, args_superclasse: list = []) -> str:
-    # Cette fonction génère une définition de classe Python à partir des paramètres passés et retourne une chaîne de caractères représentant la définition de classe générée.
-    # """
-    # `nom_classe`: une chaîne de caractères représentant le nom de la classe à générer.
-    # `attributs`: un dictionnaire représentant les attributs de la classe, où les clés sont les noms des attributs et les valeurs sont les types des attributs.
-    # `nom_superclasse`: une chaîne de caractères représentant le nom de la superclasse éventuelle. Si la classe n'a pas de superclasse, on peut passer une chaîne vide en argument.
-    # `args_superclasse`: une liste de chaînes de caractères représentant les arguments à passer au constructeur de la superclasse éventuelle. Si la classe n'a pas de superclasse, on peut passer une liste vide en argument.
+import re
 
-    # La fonction retourne une chaîne de caractères représentant le code source de la classe.
-    # """
+def generate_class_def(nom_classe: str, attributs: dict, nom_superclasse: str, args_superclasse: list = []) -> str:
+    """
+    Cette fonction génère une définition de classe Python à partir des paramètres passés et retourne une chaîne de caractères représentant la définition de classe générée.
+    `nom_classe`: une chaîne de caractères représentant le nom de la classe à générer.
+    `attributs`: un dictionnaire représentant les attributs de la classe, où les clés sont les noms des attributs et les valeurs sont les types des attributs.
+    `nom_superclasse`: une chaîne de caractères représentant le nom de la superclasse éventuelle. Si la classe n'a pas de superclasse, on peut passer une chaîne vide en argument.
+    `args_superclasse`: une liste de chaînes de caractères représentant les arguments à passer au constructeur de la superclasse éventuelle. Si la classe n'a pas de superclasse, on peut passer une liste vide en argument.
+
+    La fonction retourne une chaîne de caractères représentant le code source de la classe.
+    """
 
     # Initialisation des variables
     # """
@@ -23,7 +25,8 @@ def generate_class_def(nom_classe: str, attributs: dict, nom_superclasse: str, a
     definition_constructeur = ""
     has_attributs = False  # un booléen qui vérifie si la classe a des attributs ou non
     # une chaîne de caractères qui stocke la définition de base de la classe
-    modele_classe = f"class {nom_classe}"
+    tmp_name_classe = re.sub("-|\s", "_", nom_classe)
+    modele_classe = f"class {tmp_name_classe}"
 
     # """
     # Si la classe a une superclasse, celle-ci est spécifiée dans la définition.
@@ -32,7 +35,8 @@ def generate_class_def(nom_classe: str, attributs: dict, nom_superclasse: str, a
     # Gestion de la superclasse
     if nom_superclasse:  # si la classe a une superclasse
         # ajouter la superclasse à la définition de la classe
-        modele_classe += f"({nom_superclasse})"
+        tmp_name = re.sub("-|\s", "_", nom_superclasse)
+        modele_classe += f'({tmp_name})'
 
     modele_classe += ":\n"  # ajouter une nouvelle ligne à la définition de la classe
     # """
@@ -45,9 +49,10 @@ def generate_class_def(nom_classe: str, attributs: dict, nom_superclasse: str, a
         if nom_attribut != "subclasses":  # si l'attribut n'est pas une sous-classe
             has_attributs = True  # la classe a des attributs
             # ajouter le nom de l'attribut à la liste des arguments du constructeur
-            args_constructeur.append(nom_attribut)
+            args_constructeur.append(nom_attribut.replace(' ','_'))
             # ajouter une ligne au code de définition du constructeur pour initialiser l'attribut
-            definition_constructeur += f"\n\t\tself.{nom_attribut} = {nom_attribut}"
+            tmp_name_attribut = re.sub("-|\s", "_", nom_attribut)
+            definition_constructeur += f"\n\t\tself.{tmp_name_attribut} = {tmp_name_attribut}"
 
     # """
     # Si l'attribut est `name` et que la classe est une classe `Product`,

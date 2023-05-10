@@ -14,3 +14,5 @@ chaise2 = products.Chair(75,150,"PEPOUSE","Metal","Gris",(60,60,80))
 
 table1 = products.Table(250,500,"TEX","Bois","Chêne",(150,80,75))
 table2 = products.Table(350,700,"TEX","Verre","Transparent",(120,60,75))
+
+print(vars(table2))
