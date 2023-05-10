@@ -1,7 +1,6 @@
 import json
-from unidecode import unidecode
-from treelib import Tree
 import os
+from unidecode import unidecode
 
 def json_dict_from_file(file_name):
     """
