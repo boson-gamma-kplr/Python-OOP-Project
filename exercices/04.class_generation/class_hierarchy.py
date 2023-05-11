@@ -35,25 +35,23 @@ def generate_class_hierarchy(json_dict :dict, superclass_name:str=None,superclas
     class_defs = ""
     # Itération sur les éléments du dictionnaire
     # pour chaque nom de classe (class_name) et attribut de cette dernière (class_attrs) dans les éléments de  json_dict, faire:
-    for key,item in json_dict.items():
+    for class_name,class_attrs in json_dict.items():
     #     - Générer la définition de la classe avec la méthode generate_class_def() en passant les arguments superclass_name et superclass_args comme entrées
     #     - le résultat de la méthode generate_class_def() est stocker dans une variable 'class_def'
-        class_def = generate_class_def(key,item,superclass_name,superclass_args)
     #     - Concaténer la définition de la classe à la chaîne de caractères class_defs
-        class_defs += class_def
+        class_defs += generate_class_def(class_name,class_attrs,superclass_name,superclass_args)
     #     - Ensuite, vérifier la présence des sous-classes dans la classe courante
     #     - Si "subclasses" existe parmi les attributs de la classe courante, faire:
-        if "subclasses" in item:
+        if "subclasses" in class_attrs:
     #             -Construire une liste "super_attr" contenant les attributs de la classe courante concaténées aux arguments de la superclasse
-            super_attr = list(item.keys())+superclass_args
+            super_attr = list(class_attrs.keys())+superclass_args
     #             -Puis, supprimer l'attribut 'subclasses' à partir de la liste créée
             super_attr.remove("subclasses")
     #             - Ensuite, faire une récursion pour générer la définition de la sous-classe en utilisant la méthode generate_class_hierarchy
     #             - En passant le nom de la classe courante en tant que superclass_name et la liste super_attr en tant que superclass_args
     #             - Concaténer la définition de la sous-classe à la chaîne de caractères class_defs
-            class_defs += generate_class_hierarchy(item["subclasses"],key,super_attr)
+            class_defs += generate_class_hierarchy(class_attrs["subclasses"],class_name,super_attr)
 
-    
     # Retourne la chaîne de caractères contenant les définitions de classes
     return class_defs
 

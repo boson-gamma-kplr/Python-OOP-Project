@@ -3,7 +3,8 @@ class Product:
 		self.cost = cost
 		self.price = price
 		self.marque = marque
-		self.name=type(self).__name__
+		#self.name=type(self).__name__
+		self.name=type(self).__name__ +'_'+self.marque
 
 class Biens_Consommation(Product):
 	def __init__(self, cost, price, marque):

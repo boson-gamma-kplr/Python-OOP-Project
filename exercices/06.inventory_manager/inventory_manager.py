@@ -78,7 +78,7 @@ class InventoryManager:
     
     #Méthode restock_product
    
-    def restock_product(self, product:Product, quantity):
+    def restock_product(self, product_name, quantity):
         """
         La méthode restock_product est utilisée pour restocker une quantité donnée d'un produit.
         Elle prend en argument le nom du produit et la quantité à restocker.
@@ -87,12 +87,11 @@ class InventoryManager:
         #Si le produit est trouvé, appeler la méthode 'restock' de l'objet InventoryProductEntry correspondant avec la quantité à restocker
         #Si le réapprovisionnement est réussi, afficher un message de confirmation
         #Sinon, on appelle la méthode add_product pour ajouter le produit en stock avec une quantité nulle et on rappelle la fonction restock_product pour le restocker
-        if self.product_exists(product.name):
-            if self.inventory[product.name].restock(quantity):
+        if self.product_exists(product_name):
+            if self.inventory[product_name].restock(quantity):
                 print(f"Restock completed")      
         else:
-            self.add_product(product,quantity)
-            #TO DO : check if no need to call restock
+            self.add_product(self.get_product(product_name),quantity)
 
     #Méthode get_product
     def get_product(self, product_name):

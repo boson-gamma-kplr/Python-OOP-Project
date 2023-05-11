@@ -71,7 +71,7 @@ class TestInventoryManager(unittest.TestCase):
          -Vérification que le nombre de chaises en stock a bien été mis à jour avec la méthode assertEqual
         """
         self.inventory_manager.add_product(self.chaise, 10)
-        self.inventory_manager.restock_product(self.chaise, 5)
+        self.inventory_manager.restock_product(self.chaise.name, 5)
         self.assertEqual(self.inventory_manager.list_products()[self.chaise.name]._quantity, 15)
         
     # Test de la méthode get_product de la classe InventoryManager
@@ -97,7 +97,7 @@ class TestInventoryManager(unittest.TestCase):
         self.inventory_manager.add_product(self.chaise, 5)
         self.inventory_manager.add_product(self.pantalon, 10)
         list_product = self.inventory_manager.list_products()
-        str_to_check = "Chaise (Ikea): 5 in stock, price:100"
+        str_to_check = "Chaise_Ikea (Ikea): 5 in stock, price:100"
         self.assertEqual(str(list_product[self.chaise.name]), str_to_check)
 
 # Exécuter le code     
