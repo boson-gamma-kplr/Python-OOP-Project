@@ -163,6 +163,10 @@ def main():
             inventory_manager.sell_product(name,quantity)
 
         elif choice == "D":
+            print(f"Liste des produits en stock : \n")
+            list_of_products = inventory_manager.list_products()
+            print('\n')
+            set_autocomplete(list_of_products.keys())
             name = input("Enter the name of the product: ")
             # write code to get product
 
