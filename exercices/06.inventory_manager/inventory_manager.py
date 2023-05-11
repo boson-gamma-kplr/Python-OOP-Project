@@ -1,10 +1,11 @@
 #La classe "InventoryManager" est une classe qui permet de gérer un inventaire de produits. 
 import sys
-sys.path.append("exercices/05.inventory_product_entry")
+sys.path.extend(["exercices/05.inventory_product_entry","exercices/08.profit_tracker"])
 
 import product_classes
 from product_classes import Product
 from inventory_product_entry import InventoryProductEntry
+from profit_tracker import ProfitTracker
 
 class InventoryManager:
     # Initialisation de la classe
@@ -12,6 +13,7 @@ class InventoryManager:
         # Vous initialisez un dictionnaire 'inventory' qui stocke l'inventaire de tous les produits
         # Il prend comme clé le nom du produit, et la valeur est un objet InventoryProductEntry
         self.inventory : dict[str, InventoryProductEntry] = {}
+        self._profitTracker = ProfitTracker()
 
     #Méthode product_exists
     def product_exists(self, product_name):
@@ -45,6 +47,7 @@ class InventoryManager:
             print(f"Product already exist")
         else:
             self.inventory[product.name] = InventoryProductEntry(product, quantity)
+            self._profitTracker.buy_product(product, quantity)
             
     
     #Méthode remove_product
@@ -73,6 +76,7 @@ class InventoryManager:
         #Sinon, afficher un message d'erreur indiquant que la vente a échoué
         if self.product_exists(product_name):
             self.inventory[product_name].sell(quantity)
+            self._profitTracker.sell_product(self.get_product(product_name), quantity)
         else:
             print("Sell failed, no product named {product_name} found")
     
@@ -89,9 +93,11 @@ class InventoryManager:
         #Sinon, on appelle la méthode add_product pour ajouter le produit en stock avec une quantité nulle et on rappelle la fonction restock_product pour le restocker
         if self.product_exists(product_name):
             if self.inventory[product_name].restock(quantity):
-                print(f"Restock completed")      
+                print(f"Restock completed")
+                self._profitTracker.buy_product(self.get_product(product_name), quantity) 
         else:
             self.add_product(self.get_product(product_name),quantity)
+            self._profitTracker.buy_product(self.get_product(product_name), quantity)
 
     #Méthode get_product
     def get_product(self, product_name):
@@ -122,3 +128,6 @@ class InventoryManager:
             print(key)
 
         return self.inventory
+    
+    def get_balance(self):
+        return self._profitTracker._balance

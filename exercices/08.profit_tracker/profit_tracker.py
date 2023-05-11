@@ -22,8 +22,8 @@ class ProfitTracker:
         #     Sinon, si le solde est suffisant:
         #         met à jour le solde en soustrayant le coût du produit multiplié par la quantité achetée
         #         retourne True pour indiquer que l'achat a réussi
-        if self._balance >= product.cost * quantity:
-            self._balance -= product.cost * quantity
+        if self._balance >= float(product.cost) * quantity:
+            self._balance -= float(product.cost) * quantity
             return True
         else:
             print("Solde insuffisant pour acheter la quantité demandée")
@@ -35,5 +35,5 @@ class ProfitTracker:
         La méthode sell_product est utilisée pour vendre un produit et mettre à jour le solde.
         """
         # Met à jour le solde en ajoutant le prix du produit multiplié par la quantité vendue
-        self._balance += product.price * quantity
+        self._balance += float(product.price) * quantity
 

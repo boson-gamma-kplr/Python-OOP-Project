@@ -40,7 +40,7 @@ class InventoryProductEntry:
             return False
         else:
             self._quantity -= quantity
-            self._sales += quantity * self._product.price
+            self._sales += quantity * float(self._product.price)
             return True
     
     #Méthode Restock  
@@ -52,7 +52,7 @@ class InventoryProductEntry:
         # Ajouter la quantité reçue à la quantité en stock
         # Ajouter le coût total de la nouvelle quantité reçue à la variable 'expenses' en multipliant la quantité reçue par le coût du produit
         self._quantity += quantity
-        self._expenses += quantity * self._product.price
+        self._expenses += quantity * float(self._product.price)
     
     #Méthode repr 
     def __repr__(self):

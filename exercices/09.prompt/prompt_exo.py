@@ -169,23 +169,21 @@ def main():
             set_autocomplete(list_of_products.keys())
             name = input("Enter the name of the product: ")
             # write code to get product
-
-            #if product:
+            product = inventory_manager.get_product(name)
+            if product:
                 # write code to remove product
-                # 
-                #
-                #
-                #print(f"{name} has been removed from stock.")
-            #else:
-                #print(f"{name} is not in stock.")
+                inventory_manager.remove_product(name)
+                print(f"{name} a été supprimé du stock.")
+            else:
+                print(f"{name} n'est pas dans le stock")
 
         elif choice == "L":
+            print(f"Liste des produits en stock : \n")
             inventory_manager.list_products()
 
         elif choice == "B":
             # write code to print current balance
-                # 
-            # supprimer la ligne suivante apres avoir ecrit cotre code
+            print(f"Balance : {inventory_manager.get_balance()}")
             pass
         elif choice == "Q":
             print("Goodbye!")
