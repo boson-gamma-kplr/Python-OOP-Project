@@ -45,7 +45,7 @@ def generate_class_hierarchy(json_dict :dict, superclass_name:str=None,superclas
     #     - Si "subclasses" existe parmi les attributs de la classe courante, faire:
         if "subclasses" in item:
     #             -Construire une liste "super_attr" contenant les attributs de la classe courante concaténées aux arguments de la superclasse
-            super_attr = superclass_args + list(item.keys())
+            super_attr = list(item.keys())+superclass_args
     #             -Puis, supprimer l'attribut 'subclasses' à partir de la liste créée
             super_attr.remove("subclasses")
     #             - Ensuite, faire une récursion pour générer la définition de la sous-classe en utilisant la méthode generate_class_hierarchy
@@ -79,6 +79,7 @@ def main_function():
     """main function"""
     json_dict = load_json_dict()
     class_def = generate_class_hierarchy(json_dict)
+    write_content(class_def,"product_classes.py")
     print(class_def)
 
 if __name__ == '__main__':
