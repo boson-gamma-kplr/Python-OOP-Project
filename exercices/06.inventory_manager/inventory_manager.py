@@ -46,9 +46,10 @@ class InventoryManager:
         if self.product_exists(product.name):
             print(f"Product already exist")
         else:
-            self.inventory[product.name] = InventoryProductEntry(product, quantity)
-            self._profitTracker.buy_product(product, quantity)
-            
+            if self._profitTracker.buy_product(product, quantity):
+                self.inventory[product.name] = InventoryProductEntry(product, quantity)
+                return True
+        return False
     
     #Méthode remove_product
     def remove_product(self, product_name):
@@ -92,12 +93,13 @@ class InventoryManager:
         #Si le réapprovisionnement est réussi, afficher un message de confirmation
         #Sinon, on appelle la méthode add_product pour ajouter le produit en stock avec une quantité nulle et on rappelle la fonction restock_product pour le restocker
         if self.product_exists(product_name):
-            if self.inventory[product_name].restock(quantity):
+            if self._profitTracker.buy_product(self.get_product(product_name), quantity):
+                self.inventory[product_name].restock(quantity)
                 print(f"Restock completed")
-                self._profitTracker.buy_product(self.get_product(product_name), quantity) 
         else:
-            self.add_product(self.get_product(product_name),quantity)
-            self._profitTracker.buy_product(self.get_product(product_name), quantity)
+            if self._profitTracker.buy_product(self.get_product(product_name), quantity):
+                self.add_product(self.get_product(product_name),quantity)
+
 
     #Méthode get_product
     def get_product(self, product_name):

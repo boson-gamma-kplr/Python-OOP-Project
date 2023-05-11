@@ -137,8 +137,8 @@ def main():
             product_entry = prompt_for_instance(globals()[product_name.split('.')[-1]])
             quantity = int(input("Enter quantity: "))
             # write code to create a instance of classe product_name
-            inventory_manager.add_product(product_entry,quantity)
-            print(f"{quantity} {product_entry.name} ont été rajoutés à l'inventaire .")
+            if inventory_manager.add_product(product_entry,quantity):
+                print(f"{quantity} {product_entry.name} ont été rajoutés à l'inventaire .")
 
         elif choice == "R":
             # write code to get product by name
