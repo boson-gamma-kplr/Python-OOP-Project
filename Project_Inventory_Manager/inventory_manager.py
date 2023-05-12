@@ -121,4 +121,11 @@ class InventoryManager:
 
     def get_balance(self):
         """Return the current balance"""
-        return self._profitTracker._balance
+        return self._profitTracker.get_balance()
+
+    def save_inventory(self, path_database_inventory):
+        """Save the inventory in the database"""
+        
+
+    def load_inventory(self, path_database_inventory):
+        """Load the database into the inventory"""

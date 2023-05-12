@@ -30,3 +30,7 @@ class ProfitTracker:
         """
         # Met à jour le solde en ajoutant le prix du produit multiplié par la quantité vendue
         self._balance += float(product.price) * quantity
+
+    def get_balance(self):
+        """Getter _balance"""
+        return self._balance

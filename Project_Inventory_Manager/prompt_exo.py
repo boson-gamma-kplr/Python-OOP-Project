@@ -85,109 +85,104 @@ def main():
 			B. Show the current balance
 			Q. Quit
 		""")
+        try:
 
-        
-        choice = input("Enter your choice: ")
-        choice = choice.upper()
-        
-
-        if choice == "A":                         
-            # write code to get class tree hierachy
-            # convert the tree object to TreeExt to get the new functionalities 
-            # described above in TreeExt class
-            # class_tree = TreeExt(generate_tree_hierarchy(json_dict))
+            choice = input("Enter your choice: ")
+            choice = choice.upper()
             
-            # ecrire le code pour récupérer les avant dernier noeus de classe
-            # (dernier niveau de catégories de produits)
-            # product_classes = class_tree.get_penultimate_nodes()
-            #class_tree = TreeExt()
-            class_tree = TreeExt()
-            # Créer le noeud racine pour l'arbre
-            class_tree.create_node(tag="Product Classes Hierarchy", identifier="racine")
-            create_tree_from_dict(class_tree, "racine", json_dict)
 
-            sep()
+            if choice == "A":                         
+                # write code to get class tree hierachy
+                # convert the tree object to TreeExt to get the new functionalities 
+                # described above in TreeExt class
+                # class_tree = TreeExt(generate_tree_hierarchy(json_dict))
+                
+                # ecrire le code pour récupérer les avant dernier noeus de classe
+                # (dernier niveau de catégories de produits)
+                # product_classes = class_tree.get_penultimate_nodes()
+                #class_tree = TreeExt()
+                class_tree = TreeExt()
+                # Créer le noeud racine pour l'arbre
+                class_tree.create_node(tag="Product Classes Hierarchy", identifier="racine")
+                create_tree_from_dict(class_tree, "racine", json_dict)
 
-            # write code to print list of product_classes
-            print("Choisissez une catégorie parmis la liste suivante :\n")
-            product_categories = class_tree.get_penultimate_nodes()
-            product_categories_tag_id = dict(zip([class_tree.get_node(node).tag for node in product_categories], product_categories))
-            for tag,_ in product_categories_tag_id.items():
-                print(tag)
-            print("\n")
+                sep()
 
-            set_autocomplete(list(product_categories_tag_id.keys()))
-            category = input("Choisissez la catégorie du produit :\n")
-            # Get the immediate children nodes of node 'B'
-            print("Choisissez un produit parmis la liste suivante :\n")
-            children_nodes = class_tree.get_children_nodes(product_categories_tag_id[category])
-            product_children_tag_id = dict(zip([class_tree.get_node(node).tag for node in children_nodes], children_nodes))
-            # write code to print list of children_nodes
-            for tag,_ in product_children_tag_id.items():
-                print(tag)
-            print("\n")
+                # write code to print list of product_classes
+                print("Choisissez une catégorie parmis la liste suivante :\n")
+                product_categories = class_tree.get_penultimate_nodes()
+                product_categories_tag_id = dict(zip([class_tree.get_node(node).tag for node in product_categories], product_categories))
+                for tag,_ in product_categories_tag_id.items():
+                    print(tag)
+                print("\n")
 
-            set_autocomplete(list(product_children_tag_id.keys()))
-            product_name = input("Choisissez le produit :\n")
-    
-            # write code to add product_entry and quantity in Inventory Manager
-            product_entry = prompt_for_instance(globals()[re.sub("-|\s", "_", product_name.split('.')[-1])])
-            quantity = int(input("Enter quantity: "))
-            # write code to create a instance of classe product_name
-            if inventory_manager.add_product(product_entry,quantity):
-                print(f"{quantity} {product_entry.name} ont été rajoutés à l'inventaire .")
+                set_autocomplete(list(product_categories_tag_id.keys()))
+                category = input("Choisissez la catégorie du produit :\n")
+                # Get the immediate children nodes of node 'B'
+                print("Choisissez un produit parmis la liste suivante :\n")
+                children_nodes = class_tree.get_children_nodes(product_categories_tag_id[category])
+                product_children_tag_id = dict(zip([class_tree.get_node(node).tag for node in children_nodes], children_nodes))
+                # write code to print list of children_nodes
+                for tag,_ in product_children_tag_id.items():
+                    print(tag)
+                print("\n")
 
-        elif choice == "R":
-            # write code to get product by name
-            print("Liste des produits en stock : \n")
-            list_of_products = inventory_manager.list_products()
-            print('\n')
-            set_autocomplete(list_of_products.keys())
-            name = input("Entrez le nom du produit a reapprovisionner :\n")
-            quantity = int(input("Entrez la quantité de produit a réapprovisionner: \n"))
+                set_autocomplete(list(product_children_tag_id.keys()))
+                product_name = input("Choisissez le produit :\n")
+        
+                # write code to add product_entry and quantity in Inventory Manager
+                product_entry = prompt_for_instance(globals()[re.sub("-|\s", "_", product_name.split('.')[-1])])
+                quantity = int(input("Enter quantity: "))
+                # write code to create a instance of classe product_name
+                if inventory_manager.add_product(product_entry,quantity):
+                    print(f"{quantity} {product_entry.name} ont été rajoutés à l'inventaire .")
+            elif choice == "R":
+                # write code to get product by name
+                print("Liste des produits en stock : \n")
+                list_of_products = inventory_manager.list_products()
+                print('\n')
+                set_autocomplete(list_of_products.keys())
+                name = input("Entrez le nom du produit a reapprovisionner :\n")
+                quantity = int(input("Entrez la quantité de produit a réapprovisionner: \n"))
 
-            # write code to restock product
-            inventory_manager.restock_product(name,quantity)
-            
-        elif choice == "S":
-            print("Liste des produits en stock : \n")
-            list_of_products = inventory_manager.list_products()
-            print('\n')
-            set_autocomplete(list_of_products.keys())
-            name = input("Entrez le nom du produit a vendre :\n")
-            quantity = int(input("Entrez la quantité de produit à vendre: \n"))
+                # write code to restock product
+                inventory_manager.restock_product(name,quantity)    
+            elif choice == "S":
+                print("Liste des produits en stock : \n")
+                list_of_products = inventory_manager.list_products()
+                print('\n')
+                set_autocomplete(list_of_products.keys())
+                name = input("Entrez le nom du produit a vendre :\n")
+                quantity = int(input("Entrez la quantité de produit à vendre: \n"))
 
-            inventory_manager.sell_product(name,quantity)
-
-        elif choice == "D":
-            print("Liste des produits en stock : \n")
-            list_of_products = inventory_manager.list_products()
-            print('\n')
-            set_autocomplete(list_of_products.keys())
-            name = input("Enter the name of the product: ")
-            # write code to get product
-            product = inventory_manager.get_product(name)
-            if product:
-                # write code to remove product
-                inventory_manager.remove_product(name)
-                print(f"{name} a été supprimé du stock.")
+                inventory_manager.sell_product(name,quantity)
+            elif choice == "D":
+                print("Liste des produits en stock : \n")
+                list_of_products = inventory_manager.list_products()
+                print('\n')
+                set_autocomplete(list_of_products.keys())
+                name = input("Enter the name of the product: ")
+                # write code to get product
+                product = inventory_manager.get_product(name)
+                if product:
+                    # write code to remove product
+                    inventory_manager.remove_product(name)
+                    print(f"{name} a été supprimé du stock.")
+                else:
+                    print(f"{name} n'est pas dans le stock")
+            elif choice == "L":
+                print("Liste des produits en stock : \n")
+                inventory_manager.list_products()
+            elif choice == "B":
+                # write code to print current balance
+                print(f"Balance : {inventory_manager.get_balance()}")
+            elif choice == "Q":
+                print("Goodbye!")
+                break
             else:
-                print(f"{name} n'est pas dans le stock")
-
-        elif choice == "L":
-            print("Liste des produits en stock : \n")
-            inventory_manager.list_products()
-
-        elif choice == "B":
-            # write code to print current balance
-            print(f"Balance : {inventory_manager.get_balance()}")
-            pass
-        elif choice == "Q":
-            print("Goodbye!")
-            break
-
-        else:
-            print("Invalid choice.")
+                print("Invalid choice.")
+        except Exception as exception:
+            print(f"Error : {exception}")
 
 
 if __name__ == '__main__':
