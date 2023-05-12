@@ -1,15 +1,14 @@
-#La classe "InventoryManager" est une classe qui permet de gérer un inventaire de produits. 
-import product_classes
-from product_classes import Product
 from inventory_product_entry import InventoryProductEntry
 from profit_tracker import ProfitTracker
+from product_classes import Product
 
 class InventoryManager:
+    """An inventory manager"""
     # Initialisation de la classe
     def __init__(self):
         # Vous initialisez un dictionnaire 'inventory' qui stocke l'inventaire de tous les produits
         # Il prend comme clé le nom du produit, et la valeur est un objet InventoryProductEntry
-        self.inventory : Dict[str, InventoryProductEntry] = {}
+        self.inventory : dict[str, InventoryProductEntry] = {}
         self._profitTracker = ProfitTracker()
 
     #Méthode product_exists
@@ -26,10 +25,7 @@ class InventoryManager:
         #     if inventory_product_entry_key == product.name:
         #         return True
         # return False
-        return product_name in self.inventory
-    
-    #Méthode add_product
-    
+
     def add_product(self, product:Product, quantity):
         """
         La méthode add_product est utilisée pour ajouter un nouveau produit à l'inventaire.
@@ -47,8 +43,7 @@ class InventoryManager:
                 self.inventory[product.name] = InventoryProductEntry(product, quantity)
                 return True
         return False
-    
-    #Méthode remove_product
+
     def remove_product(self, product_name):
         """
         La méthode remove_product est utilisée pour supprimer un produit de l'inventaire.
@@ -61,8 +56,7 @@ class InventoryManager:
             self.inventory.pop(product_name)
         else:
             print(f"No product named {product_name} found")
-    
-    #Méthode sell_product
+
     def sell_product(self, product_name, quantity):
         """
         La méthode sell_product est utilisée pour vendre une quantité donnée d'un produit.
@@ -77,9 +71,7 @@ class InventoryManager:
             self._profitTracker.sell_product(self.get_product(product_name), quantity)
         else:
             print("Sell failed, no product named {product_name} found")
-    
-    #Méthode restock_product
-   
+
     def restock_product(self, product_name, quantity):
         """
         La méthode restock_product est utilisée pour restocker une quantité donnée d'un produit.
@@ -114,7 +106,6 @@ class InventoryManager:
             print(f"No product named {product_name} found")
             return None
 
-    #Méthode list_products
     def list_products(self):
         """
         La méthode list_products(self) parcourt tous les produits de l'inventaire 
@@ -127,6 +118,7 @@ class InventoryManager:
             print(key)
 
         return self.inventory
-    
+
     def get_balance(self):
+        """Return the current balance"""
         return self._profitTracker._balance

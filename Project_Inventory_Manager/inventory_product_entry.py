@@ -1,9 +1,9 @@
-# Vous allez créer une classe InventoryProductEntry qui a pour role 
-# de représenter une entrée d'inventaire pour un produit spécifique.
-import product_classes
 from product_classes import Product
 
 class InventoryProductEntry:
+    """
+    InventoryProductEntry a pour role de représenter une entrée d'inventaire pour un produit spécifique.
+    """
     # Initialisation de la classe, en prenant en argument un objet Product et une quantité initiale
     def __init__(self, product:Product, quantity):
         """
@@ -19,7 +19,6 @@ class InventoryProductEntry:
         self._sales = 0
         self._expenses = 0
 
-    #Méthode Sell
     def sell(self, quantity):
         """
         La méthode sell est utilisée pour retirer la quantité vendue du produit depuis le stock.
@@ -42,8 +41,7 @@ class InventoryProductEntry:
             self._quantity -= quantity
             self._sales += quantity * float(self._product.price)
             return True
-    
-    #Méthode Restock  
+
     def restock(self, quantity):
         """
         La méthode restock est utilisée pour augmenter la quantité en stock lorsqu'un nouveau stock de produit est reçu. 
@@ -53,8 +51,7 @@ class InventoryProductEntry:
         # Ajouter le coût total de la nouvelle quantité reçue à la variable 'expenses' en multipliant la quantité reçue par le coût du produit
         self._quantity += quantity
         self._expenses += quantity * float(self._product.price)
-    
-    #Méthode repr 
+
     def __repr__(self):
         """
         La méthode repr est utilisée pour fournir une représentation en chaîne de caractères de l'objet InventoryProductEntry, 

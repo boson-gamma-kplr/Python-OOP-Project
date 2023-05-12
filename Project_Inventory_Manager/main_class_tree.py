@@ -24,5 +24,4 @@ def main():
     my_tree.show()
 
 if __name__ == '__main__':
-    # Appeler la fonction principale
     main()

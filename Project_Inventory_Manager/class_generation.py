@@ -25,8 +25,8 @@ def generate_class_def(nom_classe: str, attributs: dict, nom_superclasse: str, a
     definition_constructeur = ""
     has_attributs = False  # un booléen qui vérifie si la classe a des attributs ou non
     # une chaîne de caractères qui stocke la définition de base de la classe
-    tmp_name_classe = re.sub("-|\s", "_", nom_classe)
-    modele_classe = f"class {tmp_name_classe}"
+    #tmp_name_classe = 
+    modele_classe = 'class {0}'.format(re.sub("-|\s", "_", nom_classe))
 
     # """
     # Si la classe a une superclasse, celle-ci est spécifiée dans la définition.
@@ -35,8 +35,7 @@ def generate_class_def(nom_classe: str, attributs: dict, nom_superclasse: str, a
     # Gestion de la superclasse
     if nom_superclasse:  # si la classe a une superclasse
         # ajouter la superclasse à la définition de la classe
-        tmp_name = re.sub("-|\s", "_", nom_superclasse)
-        modele_classe += f'({tmp_name})'
+        modele_classe += '({0})'.format(re.sub("-|\s", "_", nom_superclasse))
 
     modele_classe += ":\n"  # ajouter une nouvelle ligne à la définition de la classe
     # """

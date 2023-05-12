@@ -1,16 +1,9 @@
-# import sys
-# sys.path.extend(['.','..','/workspaces/Python-OOP-Project/exercices/05.inventory_product_entry',\
-#                  '/workspaces/Python-OOP-Project/exercices/06.inventory_manager',\
-#                  '/workspaces/Python-OOP-Project/exercices/03.class_tree'])
-from treelib import Tree
-import json
-from unidecode import unidecode
 import readline
-import treelib
-import os
-from product_classes import *
+import re
 from inventory_manager import InventoryManager
 from class_tree_module import json_dict_from_file, create_tree_from_dict
+from treelib import Tree
+from product_classes import *
 
 # Define the prompt_for_instance function 
 # that takes a class name as a string as input
@@ -30,7 +23,7 @@ def prompt_for_instance(cls):
 # et rajoute deux fonctionnalités supplémentaires
 # get_penultimate_nodes -> recupère les avant derniers noeuds
 # get_children_nodes -> recupère les noeud terminaux
-class TreeExt(treelib.Tree):
+class TreeExt(Tree):
     def __init__(self) :
         super().__init__()
     
@@ -138,7 +131,7 @@ def main():
             product_name = input("Choisissez le produit :\n")
     
             # write code to add product_entry and quantity in Inventory Manager
-            product_entry = prompt_for_instance(globals()[product_name.split('.')[-1]])
+            product_entry = prompt_for_instance(globals()[re.sub("-|\s", "_", product_name.split('.')[-1])])
             quantity = int(input("Enter quantity: "))
             # write code to create a instance of classe product_name
             if inventory_manager.add_product(product_entry,quantity):

@@ -1,8 +1,5 @@
-# Import des modules nécessaires
 import json
-import os
 from unidecode import unidecode
-
 from class_generation import generate_class_def
 
 def load_json_dict():    
@@ -65,6 +62,7 @@ def generate_class_hierarchy(json_dict :dict, superclass_name:str=None,superclas
 # Après avoir terminé d'écrire dans le fichier, la méthode se termine et le fichier est automatiquement fermé grâce à l'utilisation de la clause with.
 # """    
 def write_content(content,filename):
+        """Write the content into a file named filename"""
         with open(filename, "w", encoding='utf-8') as f:
             f.write(content)
 
