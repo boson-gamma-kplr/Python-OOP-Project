@@ -61,7 +61,7 @@ def main():
     # write code to read json file as dict
 
     # Chargement des données JSON à partir du fichier dans un dictionnaire python
-    json_dict = json_dict = json_dict_from_file("/workspaces/Python-OOP-Project/exercices/03.class_tree/json_data.json")
+    json_dict = json_dict_from_file("Data/json_data_classes.json")
 
     readline.set_completer_delims('\t\n')
     readline.parse_and_bind("tab: complete")

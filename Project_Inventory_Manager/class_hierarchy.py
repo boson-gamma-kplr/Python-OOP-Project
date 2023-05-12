@@ -7,8 +7,7 @@ from class_generation import generate_class_def
 
 def load_json_dict():    
     """Charger des données JSON à partir du fichier dans un dictionnaire python"""
-    local_path = os.path.dirname(os.path.abspath(__file__))
-    json_data = json.load(open("/workspaces/Python-OOP-Project/exercices/03.class_tree/json_data.json", "rb"))
+    json_data = json.load(open("Data/json_data_classes.json", "rb"))
 
     # Reconvertir le dictionnaire en chaine de caractere pour le traiter ensuite
     json_str = json.dumps(json_data)

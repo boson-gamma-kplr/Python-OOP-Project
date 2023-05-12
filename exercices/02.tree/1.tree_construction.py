@@ -41,14 +41,12 @@ create_tree_from_dict(my_tree, "racine", my_dict)
 # Afficher l'arbre
 my_tree.show()
 
-"""
-- Dans cet exemple, la fonction create_tree_from_dict() parcourt récursivement le dictionnaire d'entrée 
-et ajoute chaque paire clé-valeur en tant que noeud dans l'arbre. 
+# - Dans cet exemple, la fonction create_tree_from_dict() parcourt récursivement le dictionnaire d'entrée 
+# et ajoute chaque paire clé-valeur en tant que noeud dans l'arbre. 
 
-- Si une valeur de dictionnaire est rencontrée, un nouveau noeud est créé pour la clé, 
-et la fonction est appelée récursivement pour créer un sous-arbre pour la valeur de dictionnaire. 
+# - Si une valeur de dictionnaire est rencontrée, un nouveau noeud est créé pour la clé, 
+# et la fonction est appelée récursivement pour créer un sous-arbre pour la valeur de dictionnaire. 
 
-- Si une valeur non-dictionnaire est rencontrée, un nouveau noeud est créé pour la paire clé-valeur.
+# - Si une valeur non-dictionnaire est rencontrée, un nouveau noeud est créé pour la paire clé-valeur.
 
-- Une fois que l'arbre est construit, sa méthode show() est appelée pour afficher la structure de l'arbre dans la console. 
-"""
+# - Une fois que l'arbre est construit, sa méthode show() est appelée pour afficher la structure de l'arbre dans la console. 

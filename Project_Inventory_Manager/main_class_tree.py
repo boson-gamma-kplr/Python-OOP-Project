@@ -17,7 +17,7 @@ def main():
     my_tree.create_node(tag="Product Classes Hierarchy", identifier="racine")
 
     # Charger les données JSON depuis un fichier et créer la structure de l'arbre à partir du dictionnaire
-    json_dict = json_dict_from_file('json_data.json')
+    json_dict = json_dict_from_file('Data/json_data_classes.json')
     create_tree_from_dict(my_tree, "racine", json_dict)
 
     # Afficher l'arbre

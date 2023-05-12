@@ -2,7 +2,7 @@ import json
 import os
 from unidecode import unidecode
 
-def json_dict_from_file(file_name):
+def json_dict_from_file(file_path):
     """
     Cette fonction ouvre et charge les données JSON du fichier
     dans un dictionnaire Python.
@@ -10,10 +10,8 @@ def json_dict_from_file(file_name):
     Returns:
         dict: le dictionnaire Python contenant les données JSON du fichier
     """
-    # Get the directory path of the current Python file
-    local_path = os.path.dirname(os.path.abspath(__file__))
     # Chargement des données JSON à partir du fichier dans un dictionnaire python
-    json_data = json.load(open(os.path.join(local_path, file_name), "rb"))
+    json_data = json.load(open(file_path, "rb"))
     
     # il est nécessaire de reconvertir le dictionnaire en chaine de caractere pour le traiter ensuite
     json_str = json.dumps(json_data)

@@ -110,7 +110,7 @@ def generate_class_def(nom_classe: str, attributs: dict, nom_superclasse: str, a
 
 
 def test_fonction():
-
+    """test function"""
     attributs = {
         "moteur": "str",
         "nbportes": "int"
