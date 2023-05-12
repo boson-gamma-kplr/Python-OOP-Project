@@ -1,7 +1,4 @@
 #La classe "InventoryManager" est une classe qui permet de gérer un inventaire de produits. 
-import sys
-sys.path.extend(["exercices/05.inventory_product_entry","exercices/08.profit_tracker"])
-
 import product_classes
 from product_classes import Product
 from inventory_product_entry import InventoryProductEntry
@@ -12,7 +9,7 @@ class InventoryManager:
     def __init__(self):
         # Vous initialisez un dictionnaire 'inventory' qui stocke l'inventaire de tous les produits
         # Il prend comme clé le nom du produit, et la valeur est un objet InventoryProductEntry
-        self.inventory : dict[str, InventoryProductEntry] = {}
+        self.inventory : Dict[str, InventoryProductEntry] = {}
         self._profitTracker = ProfitTracker()
 
     #Méthode product_exists

@@ -1,6 +1,6 @@
 # La classe ProfitTracker est utilisée pour suivre les profits du magasin.
-import sys
-sys.path.extend(['.','..','/workspaces/Python-OOP-Project/exercices/05.inventory_product_entry','/workspaces/Python-OOP-Project/exercices/06.inventory_manager'])
+# import sys
+# sys.path.extend(['.','..','/workspaces/Python-OOP-Project/exercices/05.inventory_product_entry','/workspaces/Python-OOP-Project/exercices/06.inventory_manager'])
 from product_classes import Product
 
 class ProfitTracker:

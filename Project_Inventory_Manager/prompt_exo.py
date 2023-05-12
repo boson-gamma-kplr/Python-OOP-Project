@@ -1,13 +1,11 @@
-import sys
-sys.path.extend(['.','..','/workspaces/Python-OOP-Project/exercices/05.inventory_product_entry',\
-                 '/workspaces/Python-OOP-Project/exercices/06.inventory_manager',\
-                 '/workspaces/Python-OOP-Project/exercices/03.class_tree'])
+# import sys
+# sys.path.extend(['.','..','/workspaces/Python-OOP-Project/exercices/05.inventory_product_entry',\
+#                  '/workspaces/Python-OOP-Project/exercices/06.inventory_manager',\
+#                  '/workspaces/Python-OOP-Project/exercices/03.class_tree'])
 from treelib import Tree
 import json
 from unidecode import unidecode
-#import generator
 import readline
-#import utils
 import treelib
 import os
 from product_classes import *
@@ -70,14 +68,16 @@ def main():
 
     # Define a function to handle user input
     def auto_complete(text, list):
+        global current_entry_index
         matching_entry = [entry for entry in list if entry.startswith(text)]
         if len(matching_entry) >= 1:
-            entry_name = matching_entry[0]
+            current_entry_index = current_entry_index + 1 if current_entry_index<len(matching_entry)-1 else 0
+            entry_name = matching_entry[current_entry_index]
             remaining_text = entry_name[len(text):]
-            if remaining_text:          
+            if remaining_text:
                 readline.insert_text(remaining_text)
                 readline.redisplay()
-                
+                 
     def set_autocomplete(list):
         readline.set_completer(lambda text, state: auto_complete(text,list))
 
@@ -112,26 +112,30 @@ def main():
             # Créer le noeud racine pour l'arbre
             class_tree.create_node(tag="Product Classes Hierarchy", identifier="racine")
             create_tree_from_dict(class_tree, "racine", json_dict)
+
             sep()
 
             # write code to print list of product_classes
-            print(f"Choisissez une catégorie parmis la liste suivante :\n")
-            for node in class_tree.get_penultimate_nodes():
-                print(node)
-            print("\n")
-            set_autocomplete(list(class_tree.get_penultimate_nodes()))
-            category = input("Choisissez la catégorie du produit :\n")
-            
-            # Get the immediate children nodes of node 'B'
-            print(f"Choisissez un produit parmis la liste suivante :\n")
-            children_nodes = class_tree.get_children_nodes(category)
-            # write code to print list of children_nodes
-            for node in children_nodes:
-                print(node)
+            print("Choisissez une catégorie parmis la liste suivante :\n")
+            product_categories = class_tree.get_penultimate_nodes()
+            product_categories_tag_id = dict(zip([class_tree.get_node(node).tag for node in product_categories], product_categories))
+            for tag,_ in product_categories_tag_id.items():
+                print(tag)
             print("\n")
 
-            set_autocomplete(children_nodes)
-            product_name = input("Choisissez le produit :\n")   
+            set_autocomplete(list(product_categories_tag_id.keys()))
+            category = input("Choisissez la catégorie du produit :\n")
+            # Get the immediate children nodes of node 'B'
+            print("Choisissez un produit parmis la liste suivante :\n")
+            children_nodes = class_tree.get_children_nodes(product_categories_tag_id[category])
+            product_children_tag_id = dict(zip([class_tree.get_node(node).tag for node in children_nodes], children_nodes))
+            # write code to print list of children_nodes
+            for tag,_ in product_children_tag_id.items():
+                print(tag)
+            print("\n")
+
+            set_autocomplete(list(product_children_tag_id.keys()))
+            product_name = input("Choisissez le produit :\n")
     
             # write code to add product_entry and quantity in Inventory Manager
             product_entry = prompt_for_instance(globals()[product_name.split('.')[-1]])
@@ -142,7 +146,7 @@ def main():
 
         elif choice == "R":
             # write code to get product by name
-            print(f"Liste des produits en stock : \n")
+            print("Liste des produits en stock : \n")
             list_of_products = inventory_manager.list_products()
             print('\n')
             set_autocomplete(list_of_products.keys())
@@ -153,7 +157,7 @@ def main():
             inventory_manager.restock_product(name,quantity)
             
         elif choice == "S":
-            print(f"Liste des produits en stock : \n")
+            print("Liste des produits en stock : \n")
             list_of_products = inventory_manager.list_products()
             print('\n')
             set_autocomplete(list_of_products.keys())
@@ -163,7 +167,7 @@ def main():
             inventory_manager.sell_product(name,quantity)
 
         elif choice == "D":
-            print(f"Liste des produits en stock : \n")
+            print("Liste des produits en stock : \n")
             list_of_products = inventory_manager.list_products()
             print('\n')
             set_autocomplete(list_of_products.keys())
@@ -178,7 +182,7 @@ def main():
                 print(f"{name} n'est pas dans le stock")
 
         elif choice == "L":
-            print(f"Liste des produits en stock : \n")
+            print("Liste des produits en stock : \n")
             inventory_manager.list_products()
 
         elif choice == "B":
@@ -194,4 +198,5 @@ def main():
 
 
 if __name__ == '__main__':
+    current_entry_index = -1
     main()

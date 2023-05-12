@@ -61,4 +61,4 @@ class InventoryProductEntry:
         qui contient des informations utiles telles que le nom du produit, la marque, la quantité en stock et le prix du produit.
         """
         # Retourner une chaîne de caractères formatée contenant le nom du produit, la marque, la quantité en stock et le prix du produit.
-        return f"{self._product.name} ({self._product.marque}): {self._quantity} in stock, price:{self._product.price}"
+        return f"{self._product.name}: {self._quantity} in stock, price:{self._product.price}"
